@@ -1,0 +1,49 @@
+@using Microsoft.FeatureManagement
+@inject IVariantFeatureManager FeatureManager
+
+@if (isEnabled)
+{
+    @ChildContent
+}
+else
+{
+    @if (!string.IsNullOrWhiteSpace(FallbackText))
+    {
+        <p class="text-sm text-muted-foreground">@FallbackText</p>
+    }
+    else
+    {
+        @FallbackContent
+    }
+}
+
+@code {
+    /// <summary>
+    /// The name of the feature flag to check.
+    /// </summary>
+    [Parameter] public string FeatureName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The content to display if the feature flag is enabled, e.g. a button, link, or component.
+    /// </summary>
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Fallback content to display if the feature flag is not enabled.
+    /// </summary>
+    /// <remarks>This is superseded by <see cref="FallbackText"/> if both parameters are supplied.</remarks>
+    [Parameter] public RenderFragment? FallbackContent { get; set; }
+
+    /// <summary>
+    /// Fallback text to display if the feature flag is not enabled.
+    /// </summary>
+    /// <remarks>This is priority over <see cref="FallbackContent"/> if both parameters are supplied.</remarks>
+    [Parameter] public string? FallbackText { get; set; }
+
+    private bool isEnabled;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isEnabled = await FeatureManager.IsEnabledAsync(FeatureName);
+    }
+}

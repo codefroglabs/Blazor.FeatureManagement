@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFrameworks>net8.0;net9.0;</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <WarningsAsErrors>Nullable</WarningsAsErrors>
+        <PackageId>Blazor.FeatureManagement</PackageId>
+        <Authors>Codefrog</Authors>
+        <Company>Codefrog</Company>
+        <Description>Blazor integration for Microsoft.FeatureManagement</Description>
+        <PackageVersion>1.0.0</PackageVersion>
+        <PackageTags>Blazor,FeatureManagement</PackageTags>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageProjectUrl>
+            https://github.com/codefroglabs/Blazor.FeatureManagement
+        </PackageProjectUrl>
+        <RepositoryUrl>
+            https://github.com/codefroglabs/Blazor.FeatureManagement
+        </RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <AssemblyName>Blazor.FeatureManagement</AssemblyName>
+        <RootNamespace>Blazor.FeatureManagement</RootNamespace>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <IncludeSymbols>True</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.FeatureManagement" Version="4.0.0"/>
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.15"/>
+
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)'=='net9.0'">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.4"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="wwwroot\"/>
+    </ItemGroup>
+
+</Project>
